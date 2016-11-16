@@ -8,14 +8,18 @@ module.exports = function(grunt) {
     },
     concat: {
       options: {},
-      dist: {
-        src: [
-              'src/angular.js', 
-              'src/app.js', 
-              'src/jquery.js'
-        ],
-        dest: 'dist/stewpot.js',
-      },
+      dev: {
+        files: {
+          'dist/app.js': ['src/main.js'],
+          'dist/head.js': ['src/angular.js', 'src/jquery.js'],
+        }
+      }
+      /*,prod: {
+        files: {
+          'dist/app.js': ['src/main.js'],
+          'dist/head.js': ['src/angular.min.js', 'src/jquery.min.js'],
+        }
+      }*/
     },
     copy: {},
     karma: {
@@ -25,16 +29,12 @@ module.exports = function(grunt) {
       },
     postcss: {
       options: {
-        map: true, // inline sourcemaps 
-   
-        // or 
         map: {
             inline: false, // save all sourcemaps as separate files... 
             annotation: 'dist/css/maps/' // ...to the specified directory 
         },
    
         processors: [
-          require('pixrem')(), // add fallbacks for rem units 
           require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes 
           require('cssnano')() // minify the result 
         ]
