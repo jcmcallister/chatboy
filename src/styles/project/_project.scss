@@ -1,6 +1,14 @@
+body {
+	background-color: $color-site-base;
+}
+
 body * {
 	position: relative;
 	color: $color-font-main;
+}
+
+a {
+	text-decoration: none;
 }
 
 section {
@@ -14,6 +22,26 @@ section {
 	padding: $content-padding-y $content-padding-x;
 }
 
+.btn {
+	display: inline-block;
+	border: 2px solid transparent;
+	border-radius: 4px;
+	background-color: darken(invert($color-main),8%);
+	transition: color 200ms, border-color 200ms;
+	padding: 0.4em 0.8em;
+	margin: 1em auto;
+	color: invert($color-font-main);
+	a {
+		color: invert($color-font-main);
+	}
+	&:hover, &:active {
+		border-color: invert($color-font-main);
+		color: #000;
+		a {
+			color: #000;
+		}
+	}
+}
 
 .container {
 
@@ -23,6 +51,7 @@ section {
 	.half, .third, .quarter {
 		white-space: normal;
 		display: inline-block;
+		vertical-align: top;
 	}
 
 	.half {

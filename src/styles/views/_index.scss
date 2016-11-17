@@ -1,3 +1,47 @@
 .page--index {
-	
+
+	background: linear-gradient(0deg, $color-main, darken($color-main,10%));
+	overflow: hidden;
+
+	.wrap--content {
+		z-index: 100;
+		margin: 0 auto;
+	}
+
+	.section--top {
+		background-color: transparent;
+		.wrap--content {
+			text-align: center;
+			margin-top: 60px;
+		}
+	}
+
+	.section--blurb {
+		background-color: transparent;
+		.wrap--content {
+			max-width: 60%;
+			text-align: left;
+		}
+	}
+
+	.skew--left, .skew--right {
+		position: absolute;
+        top: 100%;
+	    width: 120%;
+	    height: 160vh;
+	}
+
+	.skew--left {
+		left: -50%;
+		transform: rotate(30deg);
+		background: linear-gradient(0deg, lighten($color-alt,5%), darken($color-alt,20%));
+		z-index: 10;
+	}
+	.skew--right {
+		right: -50%;
+		transform: rotate(-30deg);
+		background: linear-gradient(0deg, complement($color-alt), darken(complement($color-alt),30%) );
+		z-index: 20;
+	}
+
 }

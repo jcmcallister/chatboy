@@ -1,5 +1,34 @@
 .page--about {
 
+	.section--info {
+		background: linear-gradient(135deg, complement($color-main), darken(invert($color-main),20%));
+	}
+
+	.section--breakdown {
+		background-color: $color-font-main;
+		* {
+			color: invert($color-font-main);
+		}
+
+		.third {
+			width: 30%;
+			text-align: center;
+			padding-right: 3.3%;
+			&:last-of-type {
+				padding-right: 0;
+			}
+		}
+
+		h3 {
+			text-align: center;
+		    font-weight: 600;
+		    padding: 1em;
+		    border: 5px solid #222;
+		    border-radius: 50%;
+		    width: 1.75em;
+		    margin: 0 auto 10px auto;
+		}
+	}
 
 
 }
