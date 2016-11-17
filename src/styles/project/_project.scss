@@ -16,11 +16,12 @@ section {
 	&.alt {
 		background-color: $color-alt;
 	}
+
+	.wrap--content {
+		padding: $content-padding-y $content-padding-x;
+	}
 }
 
-.wrap--content {
-	padding: $content-padding-y $content-padding-x;
-}
 
 .btn {
 	display: inline-block;

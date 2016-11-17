@@ -1,0 +1,80 @@
+.chat--callout {
+
+}
+
+.chat--box {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+
+	width: 100%;
+	height: 24vh;
+
+	background-color: complement($color-font-main);
+
+	z-index: 2000;
+
+	transform: translateY(100%);
+	transition: transform 200ms;
+
+	&.open {
+		transform: translateY(0%);
+	}
+
+	.messages {
+		padding: 10px $content-padding-x;
+		max-height: 15vh;
+		overflow-x: none;
+		overflow-y: auto;
+		
+		p, input, .msg {
+			color: invert($color-font-main);
+		}
+	}
+
+	.message {
+		white-space: no-wrap;
+	}
+
+	.speaker, .msg {
+		white-space: normal;
+		vertical-align: top;
+	}
+
+	.speaker {
+		max-width: 20%;
+	}
+
+	.msg {
+		max-width: 80%;
+	}
+
+	.ts {
+		display: inline-block;
+		font-size: $font-base-backup-size;
+		font-size: $font-base-size;
+		color: lighten(invert($color-font-main),10%);
+	}
+
+	.speaker, .msg {
+		display: inline-block;
+
+	}
+
+	.input-row {
+		border-top: 2px solid #222;
+	}
+
+	button {
+		color: invert($color-font-main);
+	}
+
+	input {
+		width: 86%;
+	    height: 100%;
+	    font-size: 1em;
+	    padding-left: 5%;
+	    color: invert($color-font-main);
+	}
+
+}
