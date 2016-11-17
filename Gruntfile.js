@@ -1,17 +1,28 @@
 module.exports = function(grunt) {
 
+  // Load our plugins
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-pug');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-sass');
+
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      build: ["dist", "dist/"]
+      dev: ["dist", "dist/"]
     },
     concat: {
       options: {},
       dev: {
         files: {
-          'dist/app.js': ['src/main.js'],
-          'dist/head.js': ['src/angular.js', 'src/jquery.js'],
+          'dist/js/app.js': ['src/main.js'],
+          'dist/js/vendor.js': ['src/angular.js', 'src/jquery.js'],
         }
       }
       /*,prod: {
@@ -21,26 +32,40 @@ module.exports = function(grunt) {
         }
       }*/
     },
-    copy: {},
+    copy: {
+      //copying over only the things that don't need compiling
+      main: {
+        expand: true,
+        src: 'src/scripts/',
+        dest: 'dist/',
+      },
+    },
     karma: {
       unit: {
           configFile: 'chatfoo.conf.js'
-        }
-      },
+      }
+    },
     postcss: {
       options: {
-        map: {
-            inline: false, // save all sourcemaps as separate files... 
-            annotation: 'dist/css/maps/' // ...to the specified directory 
-        },
-   
+        map: true,
         processors: [
-          require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes 
-          require('cssnano')() // minify the result 
+          require('autoprefixer')({browsers: ['last 2 versions']})
         ]
       },
       dist: {
         src: 'css/*.css'
+      }
+    },
+    pug: {
+      compile: {
+        options: {
+          data: {
+            debug: false
+          }
+        },
+        files: {
+          'dist/*.html': ['src/markup/**/*.pug']
+        }
       }
     },
     sass: {
@@ -49,18 +74,20 @@ module.exports = function(grunt) {
       },
       build: {
         src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
+    watch: {
+      css: {
+        files: '**/*.scss',
+        tasks: ['sass'],
+        options: {
+          livereload: true,
+        },
+      },
+    }
   });
 
-  // Load our plugins
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-postcss');
-  grunt.loadNpmTasks('grunt-sass');
 
   /* By default: 
     clean out the old dist/
@@ -68,7 +95,7 @@ module.exports = function(grunt) {
     concat our JS files into one
     then copy over to dist/
   */
-  grunt.registerTask('default', ['clean:dev','sass', 'concat', 'copy']);
+  grunt.registerTask('default', ['clean:dev','pug', 'sass','postcss', 'concat', 'copy','watch']);
   grunt.registerTask('test', ['karma']);
   //grunt.registerTask('prod', [default, 'clean','sass','copy']);
 
