@@ -1,0 +1,12 @@
+extends ../layout/default.pug
+
+block content
+
+	section.section--login
+		.wrap--content
+			h2 Rep Login
+
+			form(action="", method="POST")
+				input(name="repEmail",type="text",value="")
+				input(name="repPass",type="text",value="")
+				button(type="submit") Log in

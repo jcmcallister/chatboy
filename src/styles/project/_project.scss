@@ -1,0 +1,48 @@
+body * {
+	position: relative;
+	color: $color-font-main;
+}
+
+section {
+	background-color: $color-main;
+	&.alt {
+		background-color: $color-alt;
+	}
+}
+
+.wrap--content {
+	padding: $content-padding-y $content-padding-x;
+}
+
+
+.container {
+
+	display: block;
+	white-space: nowrap;
+
+	.half, .third, .quarter {
+		white-space: normal;
+		display: inline-block;
+	}
+
+	.half {
+		width: 50%;
+	}
+
+	.third {
+		width: 33.3%;
+	}
+
+	.quarter {
+		width: 25%;
+	}
+
+	@media (max-width: 640px) {
+		white-space: normal;
+		.half, .third, .quarter {
+			display: block;
+			width: 100% !important;
+		}
+	}
+
+}

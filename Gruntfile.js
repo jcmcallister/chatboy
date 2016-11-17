@@ -59,32 +59,64 @@ module.exports = function(grunt) {
     pug: {
       compile: {
         options: {
-          data: {
-            debug: false
+          pretty: true,
+          data: function(dest, src) {
+            return {
+              from: src,
+              to: dest,
+              fileName: src[0].replace('src/markup/pages/', '').replace('.pug', '').split('/').pop()
+            }
           }
         },
-        files: {
-          'dist/*.html': ['src/markup/**/*.pug']
-        }
+        files: [{
+          cwd: "src/markup/views",
+          src: "**/*.pug",
+          dest: "dist/",
+          expand: true,
+          ext: ".html"
+        }]
       }
     },
     sass: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      dev: {
+        options: {
+            sourceMap: true
+        },
+        files: [{
+          cwd: "src/styles/",
+          src: ['**/*.scss', '!**/_*.scss'],
+          dest: "dist/css/",
+          expand: true,
+          ext: ".css"
+        }]
+      },
+      prod: {
+        options: {
+            sourceMap: false
+        },
+        files: [{
+          cwd: "src/styles/",
+          src: "*.scss",
+          dest: "dist/css/",
+          expand: true
+        }]
       }
     },
     watch: {
-      css: {
-        files: '**/*.scss',
-        tasks: ['sass'],
-        options: {
-          livereload: true,
-        },
+      options: {
+        livereload: true
       },
+      css: {
+        files: 'src/styles/**/*.scss',
+        tasks: ['sass:dev']
+      },
+      markup: {
+        files: 'src/markup/**/*.pug',
+        tasks: ['pug']
+      }
     }
   });
 
@@ -95,8 +127,10 @@ module.exports = function(grunt) {
     concat our JS files into one
     then copy over to dist/
   */
-  grunt.registerTask('default', ['clean:dev','pug', 'sass','postcss', 'concat', 'copy','watch']);
+  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'copy','watch']);
+  grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'copy']);
   grunt.registerTask('test', ['karma']);
-  //grunt.registerTask('prod', [default, 'clean','sass','copy']);
+
+  grunt.registerTask('default', ['dev']);
 
 };

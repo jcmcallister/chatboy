@@ -1,0 +1,17 @@
+/* GROUND RULES: 
+	this hierarchy is meant to enforce SASS compiling everything into a single CSS file
+	files starting with double "__" are meant to be catalog files of exactly what to include in our primary CSS file
+*/
+
+// things like variables, mixins, resets, etc.
+@import "helpers/__helpers.scss";
+
+// generic project-level settings
+@import "project/__core.scss";
+
+// any page partials
+@import "partials/__partials.scss";
+
+// our app's views, which may also be discrete pages. finer detailing than the project SASS
+@import "views/__views.scss";
+

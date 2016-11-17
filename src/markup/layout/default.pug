@@ -5,13 +5,13 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Thingy
-    link(rel='shortcut icon', href='/favicon.png')
-    link(rel='stylesheet', href='/css/styles.css')
+    link(rel='shortcut icon', href='favicon.png')
+    link(rel='stylesheet', href='css/styles.css')
 
 body
     include ../partials/header.pug
 
-    article(class="page--#{filename}")
+    article(class="page--"+fileName)
         block content
 
     include ../partials/footer.pug
