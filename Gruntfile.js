@@ -29,6 +29,11 @@ module.exports = function(grunt) {
           'src/scripts/app/controllers/controllers.js',
           'src/scripts/app/controllers/mainController.js',
           'src/scripts/app/controllers/chatController.js',
+          'src/scripts/app/directives/directives.js',
+          'src/scripts/app/services/services.js',
+          'src/scripts/app/services/chatService.js',
+          'src/scripts/app/services/repService.js',
+          'src/scripts/app/services/userService.js',
           'src/scripts/app.js'
         ],
         dest: 'dist/js/app.js',
@@ -37,7 +42,8 @@ module.exports = function(grunt) {
       vendor: {
         src: [
           'src/scripts/vendor/jquery-3.1.1.min.js',
-          'src/scripts/vendor/angular.js',
+          //'src/scripts/vendor/angular.js',
+          'src/scripts/vendor/angular.min.js',
           'src/scripts/vendor/jquery.inview.min.js'
         ],
         dest: 'dist/js/vendor.js'
@@ -180,7 +186,7 @@ module.exports = function(grunt) {
     concat our JS files into one
     then copy over to dist/
   */
-  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat','connect','watch']);
+  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'uglify:dev', 'connect','watch']);
   grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'uglify:prod']);
   grunt.registerTask('test', ['karma']);
 

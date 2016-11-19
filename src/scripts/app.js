@@ -2,7 +2,10 @@
 	'use strict';
 
 	angular.module('chatboy', [
-	  'chatboy.controllers'
+	  'chatboy.controllers',
+	  'chatboy.directives'
 	]);
+
+	//.config()
 
 })();
