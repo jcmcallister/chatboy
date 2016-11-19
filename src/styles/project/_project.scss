@@ -46,8 +46,9 @@ section {
 
 .container {
 
-	display: block;
-	white-space: nowrap;
+    display: inline-table;
+    white-space: nowrap;
+    width: 100%;
 
 	.half, .third, .quarter {
 		white-space: normal;
@@ -71,8 +72,26 @@ section {
 		white-space: normal;
 		.half, .third, .quarter {
 			display: block;
-			width: 100% !important;
+			width: 100%;
 		}
 	}
 
+}
+
+@media (min-width: 1025px) {
+	.hide--lg {
+		display: none !important;
+	}
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+	.hide--md {
+		display: none !important;
+	}
+}
+
+@media (max-width: 640px) {
+	.hide--sm {
+		display: none !important;
+	}
 }

@@ -1,5 +1,46 @@
 .chat--callout {
+	display: block;
+	position: fixed;
+	width: 100vw;
+	max-width: 100%;
 
+	padding: 6px $content-padding-x;
+	background: linear-gradient(10deg, complement($color-main), darken(complement($color-main),15%));
+	box-shadow: 1px 0px 19px 6px rgba(0, 0, 0, 0.4);
+
+	bottom: 0px;
+    left: 0px;
+    z-index: 3000;
+    overflow-x: hidden;
+
+    transform: translateY(100%);
+
+    h3, p {
+    	display: inline-block;
+    	font-size: 4vw;
+    	@media (min-width: 640px) and (max-width: 1024px) {
+    		font-size: 3vw;
+    	}
+    	@media (min-width: 1025px) {
+    		font-size: 2vw;
+    	}
+    }
+
+    &.show {
+    	transform: translateY(0%);
+    }
+
+	.shrink {
+		position: absolute;
+	    top: 0px;
+	    left: 20px;
+	    padding: 0px;
+	    margin: 10px 0px;
+	}
+
+	@media (max-width: 640px) {
+    	width: 100%;
+    }
 }
 
 .chat--box {

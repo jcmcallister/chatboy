@@ -1,11 +1,9 @@
 footer
 	.wrap--content
 		.container
-			.half
-				p Thingy, Inc.
-				p 123 FooBar Ave.
-				p Farmingdale, NJ 07070
-			.half.right
+			.half.hide--sm
+				+endmatter
+			.half.nav
 				nav
 					ul
 						li
@@ -16,3 +14,5 @@ footer
 							a(href="contact.html") Contact
 						li
 							a(href="login.html") Rep Login
+			.half.hide--lg.hide--md
+				+endmatter

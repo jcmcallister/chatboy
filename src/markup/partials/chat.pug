@@ -1,8 +1,9 @@
-.chat--callout
+.chat--callout(ng-show="repsOnline",ng-click="initChat()")
 	h3 Questions?
 	p Chat with a trained tech!
 
-.chat--box.open
+.chat--box(ng-controller="ChatController")
+	.btn.shrink(ng-click="toggleChatbox") Shrink
 	.wrap--content
 		.messages
 			.message

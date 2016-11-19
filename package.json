@@ -1,5 +1,5 @@
 {
-  "name": "chat-foo",
+  "name": "chatboy",
   "version": "0.0.1",
   "description": "Web based chat client between customer and service reps",
   "main": "dist/index.html",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "foo"
+    "url": "github.com/jcmcallister/chatboy"
   },
   "author": "Jeremy McAllister",
   "license": "MIT",
@@ -18,8 +18,10 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-pug": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-karma": "^2.0.0",
     "grunt-postcss": "^0.8.0",

@@ -3,8 +3,10 @@ module.exports = function(grunt) {
   // Load our plugins
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-pug');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-postcss');
@@ -33,6 +35,14 @@ module.exports = function(grunt) {
           'dist/head.js': ['src/angular.min.js', 'src/jquery.min.js'],
         }
       }*/
+    },
+    connect: {
+      server: {
+        options: {
+          port: 3000,
+          base: 'dist'
+        }
+      }
     },
     copy: {
       //copying over only the things that don't need compiling
@@ -107,6 +117,30 @@ module.exports = function(grunt) {
         }]
       }
     },
+    uglify: {
+      dev: {
+        options: {
+          mangle: false
+        },
+        files: [{
+          expand: true,
+          cwd: 'dist/js',
+          src: '*.js',
+          dest: 'dist/js'
+        }]
+      },
+      prod: {
+        options: {
+          mangle: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'dist/js',
+          src: '*.js',
+          dest: 'dist/js'
+        }]
+      }
+    },
     watch: {
       options: {
         livereload: true
@@ -118,6 +152,10 @@ module.exports = function(grunt) {
       markup: {
         files: 'src/markup/**/*.pug',
         tasks: ['pug']
+      },
+      js: {
+        files: 'src/scripts/**/*.js',
+        tasks: ['concat','uglify:dev','copy']
       }
     }
   });
@@ -129,8 +167,8 @@ module.exports = function(grunt) {
     concat our JS files into one
     then copy over to dist/
   */
-  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'copy','watch']);
-  grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'copy']);
+  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'uglify:dev', 'copy','connect','watch']);
+  grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'uglify:prod', 'copy']);
   grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('default', ['dev']);

@@ -1,7 +1,42 @@
 footer {
 	background-color: $color-site-base;
 
-	.right {
+	padding-top: 20px;
+	padding-left: $content-padding-x;
+	padding-right: $content-padding-x;
+
+	//padding to offset the chat-callout
+	padding-bottom: 10vw;
+	@media (min-width: 640px) and (max-width: 1024px) {
+		padding-bottom: 6vw;
+	}
+	@media (min-width: 1025px) {
+		padding-bottom: 5vw;
+	}
+
+	//padding to offset the chat-box
+	// padding-bottom: 4vw;
+	// @media (min-width: 640px) and (max-width: 1024px) {
+	// 	padding-bottom: 3vw;
+	// }
+	// @media (min-width: 1025px) {
+	// 	padding-bottom: 2vw;
+	// }
+
+	.nav {
 		text-align: right;
 	}
+
+	@media (max-width: 640px){
+		.half {
+			text-align: center;
+		}
+		li, p {
+			display: inline-block;
+			padding: 0 1em;
+		}
+		p {
+			font-size: 3vw;
+		}
+	}	
 }
