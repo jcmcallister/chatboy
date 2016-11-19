@@ -18,12 +18,14 @@ module.exports = function(grunt) {
       dev: ["dist", "dist/"]
     },
     concat: {
-      options: {},
-      dev: {
-        files: {
-          'dist/js/app.js': ['src/main.js'],
-          'dist/js/vendor.js': ['src/angular.js', 'src/jquery.js'],
-        }
+
+      app: {
+        src: ['src/scripts/app/*.js', 'src/scripts/*.js'],
+        dest: 'dist/js/app.js'
+      },
+      vendor: {
+        src: ['src/scripts/vendor/*.js'],
+        dest: 'dist/js/vendor.js'
       }
       /*,prod: {
         files: {
@@ -53,7 +55,7 @@ module.exports = function(grunt) {
         ]
       },
       dist: {
-        src: 'css/*.css'
+        src: 'dist/css/*.css'
       }
     },
     pug: {
