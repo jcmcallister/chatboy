@@ -1,23 +1,22 @@
-'use strict';
+(function() {
+	'use strict';
 
-angular.module('chatbox', 
-	['chatbox.controllers'])
+	angular.module('chatboy.controllers')
 
-.controller('MainController', [
-	function() {
-		console.log("hi from MainCtrl");
+	.controller('MainController', ['$scope',
+		function($scope) {
+			console.log("hi from MainCtrl");
 
-		$('.animate-chat-callout').one('inview', function(event, isInView) {
-		  if (isInView) {
-		    // element is now visible in the viewport
-		    $(".chat--callout").addClass('show');
-		  } else {
-		    // element has gone out of viewport 
-		  }
-		});
+			$('.animate-chat-callout').one('inview', function(event, isInView) {
+			  if (isInView) {
+			    // element is now visible in the viewport
+			    $(".chat--callout").addClass('show');
+			  } else {
+			    // element has gone out of viewport 
+			  }
+			});
 
-	}]
-);
+		}
+	]);
 
-
-
+})();

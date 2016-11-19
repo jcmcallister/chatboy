@@ -20,13 +20,26 @@ module.exports = function(grunt) {
       dev: ["dist", "dist/"]
     },
     concat: {
-
+      options: {
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        '<%= grunt.template.today("yyyy-mm-dd") %> */',
+        },
       app: {
-        src: ['src/scripts/app/*.js', 'src/scripts/*.js'],
-        dest: 'dist/js/app.js'
+        src: [
+          'src/scripts/app/controllers/controllers.js',
+          'src/scripts/app/controllers/mainController.js',
+          'src/scripts/app/controllers/chatController.js',
+          'src/scripts/app.js'
+        ],
+        dest: 'dist/js/app.js',
+
       },
       vendor: {
-        src: ['src/scripts/vendor/*.js'],
+        src: [
+          'src/scripts/vendor/jquery-3.1.1.min.js',
+          'src/scripts/vendor/angular.js',
+          'src/scripts/vendor/jquery.inview.min.js'
+        ],
         dest: 'dist/js/vendor.js'
       }
       /*,prod: {
@@ -167,8 +180,8 @@ module.exports = function(grunt) {
     concat our JS files into one
     then copy over to dist/
   */
-  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'uglify:dev', 'copy','connect','watch']);
-  grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'uglify:prod', 'copy']);
+  grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat','connect','watch']);
+  grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'uglify:prod']);
   grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('default', ['dev']);
