@@ -8,8 +8,8 @@
 			console.log("hi from RepCtrl");
 
 
-			var repData = {
-				userID		: -1, //logged out by default
+			var rep = {
+				token	: -1, //logged out by default
 				chatQueue	: [], //list of waiting customer names with chat IDs
 				ratingInfo	: {}  //containing "avg","median", more
 			};

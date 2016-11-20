@@ -11,6 +11,15 @@
 			//defaults on init
 			$scope.chatIsActive = false;
 
+			var chat = {
+				token	: null,
+				members	: [],
+				/*
+					{ "name" : "foo" }, //no userIDs here?
+					{ "name" : currentUser.name }
+				*/
+			};
+
 
 			// User functions
 

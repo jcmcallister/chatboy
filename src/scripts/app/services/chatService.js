@@ -5,16 +5,7 @@
 
 	.factory('chatService',['$http',
 		function($http){
-			var chatInstance = {
-				chatID	: null,
-				members	: [],
-				/*
-					{ "name" : "foo" }, //no userIDs here?
-					{ "name" : currentUser.name }
-				*/
-				userID 	: -1
-			};
-
+			
 			return {
 				sendMessage		: sendMessage,
 				updateMessages	: updateMessages,
@@ -25,7 +16,7 @@
 			function updateMessages() {};
 			function isChatOpen() {};
 
-			// TODO: listenForMessages()??? // socket.io could work here
+			// TODO: listenForMessages()??? // socket.io could work here, for periodic polling
 			// TODO: sendUserInfo???
 			// TODO: sendRepRating???
 			// TODO: startChat???

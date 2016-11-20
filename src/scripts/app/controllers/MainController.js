@@ -12,10 +12,10 @@
 			$scope.repsOnline = true;//	TODO: use chatService:isChatOpen() to get a bool
 
 			//this controller to house user-facing functions
-			var currentUser = {
+			var user = {
 				email: null,
 				name: null,
-				userID: -1
+				token: -1
 			};
 
 			// $('.animate-chat-callout').one('inview', function(event, isInView) {
