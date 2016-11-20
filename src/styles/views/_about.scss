@@ -10,12 +10,14 @@
 			color: invert($color-font-main);
 		}
 
-		.third {
-			width: 30%;
-			text-align: center;
-			padding-right: 3.3%;
-			&:last-of-type {
-				padding-right: 0;
+		@media (min-width: 640px) {
+			.third {
+				width: 30%;
+				text-align: center;
+				padding-right: 3.3%;
+				&:last-of-type {
+					padding-right: 0;
+				}
 			}
 		}
 

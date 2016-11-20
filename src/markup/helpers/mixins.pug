@@ -2,3 +2,15 @@ mixin endmatter
 	p Thingy, Inc.
 	p 123 FooBar Ave.
 	p Farmingdale, NJ 07070
+
+//- returns a link that has a class on it if the fileName is what is expected
+mixin nav-link(href,expectedName,activeClass)
+	- var cond = (fileName==expectedName);
+	if typeof activeClass === 'undefined'
+		- activeClass = 'active';
+	if typeof fileName === 'undefined' && typeof src === 'array' && src.length > 0
+		- fileName = src[0]
+		- cond = (fileName.indexOf(expectedName) > -1)
+	a(href=href,class=(cond ? activeClass :''))
+		if block
+			block

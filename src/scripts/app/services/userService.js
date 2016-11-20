@@ -3,27 +3,23 @@
 
 	angular.module('chatboy.services')
 
-	.factory('userService',[
-		function(){
-			var userInstance = {
-				email: null,
-				name: null,
-				userID: -1
-			};
-			var service = {
-				startChat		: startChat,
+	.factory('userService',['$http',
+		function($http){
+			
+			return {
+				startChat		: startChat, //send info here to start a chat / wait for a rep to join?
 				endChat			: endChat,
 				getTranscript 	: requestTranscript,
 				sendRepRating	: sendRepRating
 			};
-			return service;
+			
+			
+			function startChat() {};
+			function endChat() {};
+			function requestTranscript() {};
+			function sendRepRating() {};
 			// TODO: setUserInfo
-
 			// TODO: sendUserInfo
-			// TODO: sendRepRating
-			// TODO: startChat
-			// TODO: endChat
-			// TODO: requestTranscript
 		}
 	]);
 

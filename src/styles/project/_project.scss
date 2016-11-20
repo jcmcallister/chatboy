@@ -23,11 +23,30 @@ section {
 }
 
 
+@media (min-width: 1025px) {
+	.hide--lg {
+		display: none !important;
+	}
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+	.hide--md {
+		display: none !important;
+	}
+}
+
+@media (max-width: 640px) {
+	.hide--sm {
+		display: none !important;
+	}
+}
+
+
 .btn {
 	display: inline-block;
 	border: 2px solid transparent;
 	border-radius: 4px;
-	background-color: darken(invert($color-main),8%);
+	background-color: $color-flipped;
 	transition: color 200ms, border-color 200ms;
 	padding: 0.4em 0.8em;
 	margin: 1em auto;
@@ -76,22 +95,4 @@ section {
 		}
 	}
 
-}
-
-@media (min-width: 1025px) {
-	.hide--lg {
-		display: none !important;
-	}
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-	.hide--md {
-		display: none !important;
-	}
-}
-
-@media (max-width: 640px) {
-	.hide--sm {
-		display: none !important;
-	}
 }

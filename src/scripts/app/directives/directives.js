@@ -29,6 +29,10 @@
                         scope.$apply(attrs.scrollToShow);
                     }
                 });
+
+                scope.$on('$destroy', function(){
+                    // manual cleanup of any extra services, as needed
+                });
             }
         };
     })

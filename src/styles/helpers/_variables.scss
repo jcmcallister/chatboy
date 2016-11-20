@@ -9,5 +9,6 @@ $font-base-backup-size: 16px;
 // colors
 $color-main: #086da9;
 $color-alt: #0ad062;
+$color-flipped: darken(invert($color-main),8%);
 $color-font-main: #ddd;
 $color-site-base: #121512;

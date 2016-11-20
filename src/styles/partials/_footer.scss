@@ -25,6 +25,10 @@ footer {
 
 	.nav {
 		text-align: right;
+		.active {
+			color: $color-flipped;
+			text-decoration: underline;
+		}
 	}
 
 	@media (max-width: 640px){

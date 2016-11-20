@@ -3,8 +3,8 @@
 
 	angular.module('chatboy.services')
 
-	.factory('chatService',[
-		function(){
+	.factory('chatService',['$http',
+		function($http){
 			var chatInstance = {
 				chatID	: null,
 				members	: [],
@@ -15,17 +15,15 @@
 				userID 	: -1
 			};
 
-			var service = {
+			return {
 				sendMessage		: sendMessage,
 				updateMessages	: updateMessages,
 				isChatOpen		: isChatOpen
 			};
 
-			return service;
-
-			// TODO: sendMessage(from,to)
-			// TODO: checkMessages()
-			// TODO: isChatOpen()
+			function sendMessage(from,to) {};
+			function updateMessages() {};
+			function isChatOpen() {};
 
 			// TODO: listenForMessages()??? // socket.io could work here
 			// TODO: sendUserInfo???

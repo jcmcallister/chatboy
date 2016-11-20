@@ -4,8 +4,8 @@
 
 	angular.module('chatboy.controllers')
 
-	.controller('ChatController', ['$scope',
-		function($scope) {
+	.controller('ChatController', ['$scope', 'chatService',
+		function($scope, chatService) {
 			console.log("hi from ChatCtrl");
 
 			//defaults on init
