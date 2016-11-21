@@ -9,12 +9,12 @@
 			return {
 				sendMessage		: sendMessage,
 				updateMessages	: updateMessages,
-				isChatOpen		: isChatOpen
+				isChatAvailable	: isChatAvailable
 			};
 
 			function sendMessage(from,to) {};
 			function updateMessages() {};
-			function isChatOpen() {};
+			function isChatAvailable() {};
 
 			// TODO: listenForMessages()??? // socket.io could work here, for periodic polling
 			// TODO: sendUserInfo???

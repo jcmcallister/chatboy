@@ -3,39 +3,43 @@
 
     angular.module('chatboy.directives', [])
 
-    .directive('scrollToShow', function () {
-        //scroll past an element with this directive attribute, and a jquery selector's via "data-sel", will add class "data-showclass" to $(data-sel)
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
-                console.log('loading directive');
-                console.log(JSON.stringify(elem));
-                elem.bind('scroll', function () {
-                    console.log('in scroll');
-                    console.log(elem.scrollTop + elem.offsetHeight);
-                    console.log(elem.scrollHeight);
+    .directive('scrollToShow', ['$document', '$window',
+        function ($document, $window) {
+            //scroll past an element with this directive attribute, and a jquery selector's via "data-sel", will add class "data-showclass" to $(data-sel)
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
 
-                    //if we scrolled past
-                    if (elem.scrollTop > elem.scrollHeight) { 
-                        if (attrs.hasOwnProperty("dataSel") && attrs.hasOwnProperty("dataShowclass")) {
-                            //add the showclass to the dataSel element
-                            $(attrs.dataSel).addClass(attrs.dataShowclass);
-                        }else if ( attrs.hasOwnProperty("dataShowclass") ) {
+                    var element = elem[0];
+
+                    $(element).on('inview', function(event, isInView) {
+                      if (isInView) {
+                        // trigger element is now visible in the viewport
+                        if (attrs.hasOwnProperty("sel") && attrs.hasOwnProperty("showclass")) {
+                            //add the showclass to the sel element
+                            $(attrs.sel).addClass(attrs.showclass);
+                        }else if ( attrs.hasOwnProperty("showclass") ) {
                             //add the showclass to THIS element
-                            $(elem).addClass(attrs.dataShowclass);
+                            $(element).addClass(attrs.showclass);
                         }
-
                         
-                        scope.$apply(attrs.scrollToShow);
-                    }
-                });
+                      } else {
+                        // trigger element has gone out of viewport
+                        if (attrs.hasOwnProperty("sel") && attrs.hasOwnProperty("showclass")) {
+                            //remove the showclass from the sel element
+                            $(attrs.sel).removeClass(attrs.showclass);
+                        }else if ( attrs.hasOwnProperty("showclass") ) {
+                            //remove the showclass from THIS element
+                            $(element).removeClass(attrs.showclass);
+                        }
+                      }
+                      scope.$apply(attrs.scrollToShow);
+                    });
 
-                scope.$on('$destroy', function(){
-                    // manual cleanup of any extra services, as needed
-                });
-            }
-        };
-    })
+                }
+            };
+        }
+    ])
     ;
 
 })();

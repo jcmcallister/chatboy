@@ -5,6 +5,7 @@
 
 	.controller('RepController', ['$scope','repService',
 		function($scope, repService) {
+			
 			console.log("hi from RepCtrl");
 
 

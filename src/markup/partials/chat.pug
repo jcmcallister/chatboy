@@ -1,10 +1,18 @@
-.chat--callout(ng-show="repsOnline",ng-click="initChat()")
+.chat--callout(ng-click="initChat()",ng-show="!showChatbox")
 	h3 Questions?
-	p Chat with a trained tech!
+	p(ng-show="!chatInProgress") Chat with a trained tech!
+	p(ng-show="chatInProgress") Click to open chat...
 
-.chat--box(ng-controller="ChatController as chat")
-	.btn.shrink(ng-click="toggleChatbox") Shrink
-	.wrap--content
+.chat--box(ng-controller="ChatController as chat",ng-show="showChatbox",ng-class="{'open':showChatbox}")
+	.btn.shrink(ng-click="toggleChatbox()") Shrink
+	.wrap--content.userInfo(ng-show="!chatInProgress")
+		form(name="userInfo" ng-submit="submitUserInfo()")
+			.fields
+				input(name="name" ng-model="user.name" required, placeholder="Your Name")
+				input(name="email" ng-model="user.email" required, placeholder="Your E-mail")
+			button.btn(type="submit") Let's Chat
+			//-span(class="error" ng-show="myForm.input.$error.required") Required!
+	.wrap--content(ng-show="chatInProgress")
 		.messages
 			.message
 				p.speaker Messenger 
@@ -46,6 +54,6 @@
 				.msg sample message
 			
 		.input-row
-			form(action="")
-				input(type="text", value="", placeholder="Type a message, hit Enter to send")
+			form(name="message" ng-submit="submitMessage")
+				input(type="text" name="msg" ng-model="currentMsg" placeholder="Type a message, hit Enter to send" required)
 				button(type="submit") Send

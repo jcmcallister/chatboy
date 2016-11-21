@@ -6,20 +6,19 @@
 
 	.controller('ChatController', ['$scope', 'chatService',
 		function($scope, chatService) {
+			
 			console.log("hi from ChatCtrl");
 
-			//defaults on init
-			$scope.chatIsActive = false;
 
 			var chat = {
 				token	: null,
-				members	: [],
+				members	: []
+				// ,boxopen : false
 				/*
 					{ "name" : "foo" }, //no userIDs here?
 					{ "name" : currentUser.name }
 				*/
 			};
-
 
 			// User functions
 

@@ -33,7 +33,7 @@
 					};
 
 					function startChatFailed(err) {
-						$log.error('UserService :: startChat : XHR Failed ' + err.data);
+						$log.error('UserService :: startChat : XHR Failed =>' + err.data);
 					};
 				}else {
 					$log.error('UserService :: startChat : missing name or email params!');
