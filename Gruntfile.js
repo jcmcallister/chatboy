@@ -70,6 +70,12 @@ module.exports = function(grunt) {
         src: 'src/scripts/',
         dest: 'dist/',
       },
+      serve: {
+        //for use in a shell script or docker file for easy deployment & serving, AFTER COMPLETING a front-end build
+        expand: true,
+        src: 'dist/**',
+        dest: '../chatboy-server/'
+      }
     },
     karma: {
       unit: {
@@ -130,9 +136,10 @@ module.exports = function(grunt) {
         },
         files: [{
           cwd: "src/styles/",
-          src: "*.scss",
+          src: ['**/*.scss', '!**/_*.scss'],
           dest: "dist/css/",
-          expand: true
+          expand: true,
+          ext: ".css"
         }]
       }
     },
@@ -188,6 +195,7 @@ module.exports = function(grunt) {
   */
   grunt.registerTask('dev', ['clean:dev','pug', 'sass:dev','postcss', 'concat', 'uglify:dev', 'connect','watch']);
   grunt.registerTask('prod', ['clean:dev','pug', 'sass:prod','postcss', 'concat', 'uglify:prod']);
+  grunt.registerTask('serve', ['prod','copy:serve']);
   grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('default', ['dev']);

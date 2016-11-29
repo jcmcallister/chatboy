@@ -24,7 +24,7 @@
 						"email"	: obj.email
 					};
 
-					return $http.get('/routes/api/openChatSession',data)
+					return $http.post('/api/openChatSession',data)
 						.then(startChatOK)
 						.catch(startChatFailed);
 
