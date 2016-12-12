@@ -8,8 +8,8 @@
 	.wrap--content.userInfo(ng-show="!chatInProgress")
 		form(name="userInfo" ng-submit="submitUserInfo()")
 			.fields
-				input(name="name" ng-model="user.name" required, placeholder="Your Name")
-				input(name="email" ng-model="user.email" required, placeholder="Your E-mail")
+				input(name="name" ng-model="user.name" required placeholder="Your Name")
+				input(name="email" ng-model="user.email" required placeholder="Your E-mail" type="email")
 			button.btn(type="submit") Let's Chat
 			//-span(class="error" ng-show="myForm.input.$error.required") Required!
 	.wrap--content(ng-show="chatInProgress")

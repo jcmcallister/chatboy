@@ -9,7 +9,6 @@
 			
 			console.log("hi from ChatCtrl");
 
-
 			var chat = {
 				token	: null,
 				members	: []

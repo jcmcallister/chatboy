@@ -3,10 +3,10 @@
 
 	angular.module('chatboy.controllers')
 
-	.controller('MainController', ['$scope','userService',
-		function($scope, userService) {
+	.controller('MainController', ['$scope','userService', 'chatService',
+		function($scope, userService, chatService) {
 
-			$scope.repsOnline = false;//	TODO: use chatService:isChatAvailable() to get a bool
+			$scope.repsOnline = false;
 			$scope.chatInProgress = false;//TODO : receive emitted event from ChatCtrl when chat gets started/ended
 
 			$scope.showCallout = $scope.repsOnline; // by default
@@ -46,15 +46,15 @@
 				});
 			};
 
-			$scope.numAvailableReps = function(){
-				userService.checkForReps().then(function(data) {
-					console.log("numAvailableReps :: successful request");
+			$scope.checkForChat = function(){
+				chatService.isChatAvailable().then(function(data) {
+					console.log("checkForChat :: successful request");
 					console.log(JSON.stringify(data));
 					$scope.repsOnline = (data == true);
 				})
 			};
 
-			$scope.numAvailableReps();//for testing
+			$scope.checkForChat();
 
 		}
 	]);
