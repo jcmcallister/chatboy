@@ -6,7 +6,7 @@
 	.controller('MainController', ['$scope','userService',
 		function($scope, userService) {
 
-			$scope.repsOnline = true;//	TODO: use chatService:isChatAvailable() to get a bool
+			$scope.repsOnline = false;//	TODO: use chatService:isChatAvailable() to get a bool
 			$scope.chatInProgress = false;//TODO : receive emitted event from ChatCtrl when chat gets started/ended
 
 			$scope.showCallout = $scope.repsOnline; // by default
@@ -46,6 +46,15 @@
 				});
 			};
 
+			$scope.numAvailableReps = function(){
+				userService.checkForReps().then(function(data) {
+					console.log("numAvailableReps :: successful request");
+					console.log(JSON.stringify(data));
+					$scope.repsOnline = (data == true);
+				})
+			};
+
+			$scope.numAvailableReps();//for testing
 
 		}
 	]);

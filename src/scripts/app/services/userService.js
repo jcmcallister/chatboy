@@ -10,7 +10,8 @@
 				startChat		: startChat, //send info here to start a chat / wait for a rep to join?
 				endChat			: endChat,
 				getTranscript 	: requestTranscript,
-				sendRepRating	: sendRepRating
+				sendRepRating	: sendRepRating,
+				checkForReps	: checkForReps
 			};
 			
 			
@@ -42,6 +43,19 @@
 			function endChat() {};
 			function requestTranscript() {};
 			function sendRepRating() {};
+			function checkForReps() {
+				return $http.post('/api/reps/check')
+					.then(repCheckOK)
+					.catch(repCheckFailed);
+
+				function repCheckOK(res) {
+					return res.data;
+				};
+				function repCheckFailed(res) {
+					$log.error('UserService :: checkForReps : XHR Failed =>' + err.data);
+				};
+			};
+
 			// TODO: setUserInfo
 			// TODO: sendUserInfo
 		}
