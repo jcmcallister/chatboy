@@ -12,8 +12,21 @@
 				isChatAvailable	: isChatAvailable
 			};
 
-			function sendMessage(from,to) {};
+			function sendMessage(from,to) {
+				return $http.post('/api/chat/message')
+					.then(sendOK)
+					.catch(sendFailed);
+
+				function sendOK(res) {
+					return res.data;
+				};
+				function sendFailed(res) {
+					$log.error('ChatService :: sendMessage : XHR Failed =>' + err.data);
+				};
+			};
+			
 			function updateMessages() {};
+
 			function isChatAvailable() {
 				return $http.post('/api/reps/check')
 					.then(chatCheckOK)
@@ -23,7 +36,7 @@
 					return res.data;
 				};
 				function chatCheckFailed(res) {
-					$log.error('UserService :: isChatAvailable : XHR Failed =>' + err.data);
+					$log.error('ChatService :: isChatAvailable : XHR Failed =>' + err.data);
 				};
 			};
 
