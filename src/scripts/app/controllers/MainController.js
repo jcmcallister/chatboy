@@ -3,14 +3,18 @@
 
 	angular.module('chatboy.controllers')
 
-	.controller('MainController', ['$scope','userService', 'chatService',
-		function($scope, userService, chatService) {
+	.controller('MainController', ['$scope','$window','userService', 'chatService',
+		function($scope, $window, userService, chatService) {
 
 			$scope.repsOnline = false;
 			$scope.chatInProgress = false; //TODO : receive emitted event from ChatCtrl when chat gets started/ended
 
 			$scope.showCallout = $scope.repsOnline; // by default
 			$scope.showChatbox = false;
+
+			$scope.messages = [];
+			// anatomy of a message: {ts, text, from}
+
 
 			//this controller to house user-facing functions
 
@@ -46,18 +50,35 @@
 					console.log(JSON.stringify(data));
 					if(typeof data.chatData !== "undefined" && typeof data.chatData.repName !== "undefined") {
 						$scope.chatInProgress = true;
+						$window.localStorage.chatId = data.chatData.chatId;
 					}
 				}
 
 			};
 
 			$scope.checkForChat = function(){
-				chatService.isChatAvailable().then(function(data) {
-					console.log("checkForChat :: successful request");
-					console.log(JSON.stringify(data));
-					$scope.repsOnline = (data == true);
-				})
+				//if chat was already open (e.g. localstorage vars indicate so), skip this and open up what we got
+				
+				// if($window.localStorage.chatId){
+					//TODO: check to verify chat state is not ended, and if not, fetch messages & resume
+					//if chatService.getState()...
+				// } else {
+					openChat();
+				// }
 			};
+
+			function openChat() {
+				chatService.isChatAvailable().then(function(data) {
+					console.log("openChat :: successful!");
+					console.log(JSON.stringify(data));
+					enableChat(data == true);
+				});
+			}
+
+			function enableChat(bool) {
+				$scope.repsOnline = bool;
+			}
+
 
 			$scope.checkForChat();
 

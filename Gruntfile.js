@@ -34,6 +34,7 @@ module.exports = function(grunt) {
           'src/scripts/app/services/chatService.js',
           'src/scripts/app/services/repService.js',
           'src/scripts/app/services/userService.js',
+          'src/scripts/app/services/socketFactory.js',
           'src/scripts/app.js'
         ],
         dest: 'dist/js/app.js',
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
       vendor: {
         src: [
           'src/scripts/vendor/jquery-3.1.1.min.js',
-          //'src/scripts/vendor/angular.js',
+          'src/scripts/vendor/socket.io-1.4.5.js',
           'src/scripts/vendor/angular.min.js',
           'src/scripts/vendor/jquery.inview.min.js'
         ],
