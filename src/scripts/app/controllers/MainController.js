@@ -25,7 +25,7 @@
 
 			var userdata = {}, userToken = -1;
 
-			$scope.initChat = function() {
+			$scope.toggleCallout = function() {
 				$scope.showCallout = !$scope.showCallout;
 				$scope.toggleChatbox();
 			};
@@ -47,7 +47,7 @@
 				function chatStartedOK(data){
 					// TODO: add a data.token will contain be our user's unique chat token that corresponds with the server-side chat ID, might be mitigated via the session cookie
 					userdata = data;
-					console.log(JSON.stringify(data));
+					console.log("MainCtrl :: chatStartedOK : result of startChat = " + JSON.stringify(data));
 					if(typeof data.chatData !== "undefined" && typeof data.chatData.repName !== "undefined") {
 						$scope.chatInProgress = true;
 						$window.localStorage.chatId = data.chatData.chatId;
@@ -56,31 +56,45 @@
 
 			};
 
-			$scope.checkForChat = function(){
-				//if chat was already open (e.g. localstorage vars indicate so), skip this and open up what we got
-				
-				// if($window.localStorage.chatId){
-					//TODO: check to verify chat state is not ended, and if not, fetch messages & resume
-					//if chatService.getState()...
-				// } else {
-					openChat();
-				// }
+			$scope.initChat = function(){
+
+				if($window.localStorage.chatId) {
+					//if a chat was already opened, check to verify chat state is not `ended`
+					userService.getChatState($window.localStorage.chatId).then( ongoingChatCheck );
+				} else {
+					// check that reps are available
+					checkChatAvailable();
+				}
+
+
+				function ongoingChatCheck(state) {
+					if(state !== "void" && state !== 'ended') {
+						//TODO: get chat message log to backfill
+						// resume the chat
+						$scope.chatInProgress = true;
+						enableChat(true);
+					}else {
+						checkChatAvailable();
+					}
+				}
+
+
 			};
 
-			function openChat() {
+			function checkChatAvailable() {
 				chatService.isChatAvailable().then(function(data) {
-					console.log("openChat :: successful!");
+					console.log("checkChatAvailable :: successful!");
 					console.log(JSON.stringify(data));
-					enableChat(data == true);
+					enableChat(data === true);
 				});
-			}
+			};
 
 			function enableChat(bool) {
 				$scope.repsOnline = bool;
-			}
+			};
 
 
-			$scope.checkForChat();
+			$scope.initChat();
 
 		}
 	]);

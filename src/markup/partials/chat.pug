@@ -1,8 +1,8 @@
-.chat--callout(ng-click="initChat()",ng-show="!showChatbox")
+.chat--callout(ng-click="toggleCallout()",ng-show="!showChatbox")
 	
 	h3 Questions?
 	p(ng-show="!chatInProgress") Chat with a trained tech!
-	p(ng-show="chatInProgress") Click to open chat...
+	p(ng-show="chatInProgress") Click to resume chat...
 
 
 .chat--box(ng-controller="ChatController as chat",ng-show="showChatbox",ng-class="{'open':showChatbox}")

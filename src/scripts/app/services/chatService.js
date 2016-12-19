@@ -3,8 +3,8 @@
 
 	angular.module('chatboy.services')
 
-	.factory('chatService',['$http',
-		function($http){
+	.factory('chatService',['$http', '$log',
+		function($http, $log){
 			
 			return {
 				sendMessage		: sendMessage,
@@ -20,7 +20,7 @@
 				function sendOK(res) {
 					return res.data;
 				};
-				function sendFailed(res) {
+				function sendFailed(err) {
 					$log.error('ChatService :: sendMessage : XHR Failed =>' + err.data);
 				};
 			};
@@ -35,7 +35,7 @@
 				function chatCheckOK(res) {
 					return res.data;
 				};
-				function chatCheckFailed(res) {
+				function chatCheckFailed(err) {
 					$log.error('ChatService :: isChatAvailable : XHR Failed =>' + err.data);
 				};
 			};
