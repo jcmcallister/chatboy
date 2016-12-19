@@ -51,6 +51,7 @@
 					if(typeof data.chatData !== "undefined" && typeof data.chatData.repName !== "undefined") {
 						$scope.chatInProgress = true;
 						$window.localStorage.chatId = data.chatData.chatId;
+						$window.localStorage.userId = data.userId;
 					}
 				}
 
@@ -58,9 +59,9 @@
 
 			$scope.initChat = function(){
 
-				if($window.localStorage.chatId) {
+				if($window.localStorage.chatId && $window.localStorage.userId) {
 					//if a chat was already opened, check to verify chat state is not `ended`
-					userService.getChatState($window.localStorage.chatId).then( ongoingChatCheck );
+					userService.getChatState($window.localStorage.chatId,$window.localStorage.userId).then( ongoingChatCheck );
 				} else {
 					// check that reps are available
 					checkChatAvailable();
@@ -83,8 +84,8 @@
 
 			function checkChatAvailable() {
 				chatService.isChatAvailable().then(function(data) {
-					console.log("checkChatAvailable :: successful!");
-					console.log(JSON.stringify(data));
+					// console.log("checkChatAvailable :: successful!");
+					// console.log(JSON.stringify(data));
 					enableChat(data === true);
 				});
 			};

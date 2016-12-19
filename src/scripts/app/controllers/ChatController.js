@@ -28,14 +28,14 @@
 				if($scope.currentMsg) {
 
 					var data = {
-						"text": $scope.currentMsg,
-						"chatId": $window.localStorage.chatId
-					};
+						"msg": $scope.currentMsg,
+						"chatId": $window.localStorage.chatId,
+						"userId": $window.localStorage.userId
 
-					console.log("wtf is this, you want to submit THIS message? EWW: " + $scope.currentMsg);
+					};
 					
 					chatService.sendMessage(data).then(function(resultData) {
-						console.log("submitMessage :: message sent!");
+						console.log("submitMessage :: success!");
 						console.log(JSON.stringify(resultData));
 					});
 

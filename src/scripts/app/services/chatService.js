@@ -12,8 +12,8 @@
 				isChatAvailable	: isChatAvailable
 			};
 
-			function sendMessage(msg) {
-				return $http.post('/api/chat/message', {text: msg})
+			function sendMessage(data) {
+				return $http.post('/api/chat/message', data)
 					.then(sendOK)
 					.catch(sendFailed);
 

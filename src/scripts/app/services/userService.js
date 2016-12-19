@@ -43,11 +43,11 @@
 			
 			function endChat() {};
 			
-			function getChatState(id) {
-				// console.log("userSvc :: getChatState : argument is a " + typeof id);
-				var input = parseInt(id);
+			function getChatState(chatid, userid) {
+				console.log("userSvc :: getChatState : argument is a " + typeof chatid);
+				var input = parseInt(chatid);
 				if(typeof input === 'number' && Number.isNaN(input) == false) {
-					return $http.post('/api/chat/status',{"chatid":input})
+					return $http.post('/api/chat/status',{"chatId":input, "userId":parseInt(userid)})
 						.then(chatStatusOK)
 						.catch(chatStatusFailed);
 
